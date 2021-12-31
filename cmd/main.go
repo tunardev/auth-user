@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
@@ -33,7 +34,7 @@ func main() {
 
 func (app *App) Initialize() {
 	var err error
-	app.DB, err = sql.Open("postgres", "postgres://postgres:postgretunar2000@localhost/postgres?sslmode=disable")
+	app.DB, err = sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	if err != nil {
 		panic(err)
 	}
